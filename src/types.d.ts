@@ -1,9 +1,9 @@
-import { dh } from "@deephaven/jsapi-types";
+import { dh } from '@deephaven/jsapi-types'
 
 declare global {
   interface Window {
     // This is set via public/dh-core.js
-    dh: dh;
+    dh: dh
   }
 }
-export {};
+export {}
