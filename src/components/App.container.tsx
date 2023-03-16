@@ -14,7 +14,16 @@ const AppContainer: React.FC<AppContainerProps> = () => {
   const [ideSession, setIdeSession] = React.useState<IdeSession | null>(null)
 
   React.useEffect(() => {
-    initIDESession().then(setIdeSession)
+    let dispose: (() => void) | null = null
+
+    initIDESession().then((result) => {
+      dispose = result.dispose
+      setIdeSession(result.ide)
+    })
+
+    return () => {
+      dispose?.()
+    }
   }, [])
 
   return ideSession ? (
