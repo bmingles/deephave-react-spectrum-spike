@@ -1,24 +1,15 @@
 import React from 'react'
-import { ListView, Item } from '@adobe/react-spectrum'
-import { useRemoteTable } from '@/utils/useRemoteTable.hook'
-import { useRows } from '@/utils/useRows.hook'
-import { toItemList } from '@/utils/item'
+import { ListView, Item, ListData } from '@adobe/react-spectrum'
 import { ItemModel } from '@/models/item'
 
-export interface ListProps {}
+export interface ListProps {
+  viewport: ListData<ItemModel>
+}
 
-const List: React.FC<ListProps> = () => {
-  const [firstRow] = React.useState(0)
-  const [lastRow] = React.useState(9)
-
-  const table = useRemoteTable('remote_table')
-  const rows = useRows(table, firstRow, lastRow)
-
-  const items = React.useMemo(
-    () => (table ? toItemList(table, rows) : []),
-    [table, rows],
-  )
-  console.log(rows, items)
+const List: React.FC<ListProps> = ({ viewport }) => {
+  const onLoadMore = React.useCallback(() => {
+    console.log('load more')
+  }, [])
 
   return (
     <ListView<ItemModel>
@@ -26,15 +17,9 @@ const List: React.FC<ListProps> = () => {
       selectionMode="multiple"
       maxWidth="size-6000"
       height="size-3000"
-      items={items}
-      onLoadMore={function (...args: any[]): any {
-        console.log('load more')
-      }}>
-      {(item) => (
-        <Item key={item._offsetInSnapshot + firstRow}>
-          {item._offsetInSnapshot}
-        </Item>
-      )}
+      items={viewport.items}
+      onLoadMore={onLoadMore}>
+      {(item) => <Item>{String(item.key)}</Item>}
     </ListView>
   )
 }
