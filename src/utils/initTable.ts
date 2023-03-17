@@ -1,5 +1,6 @@
 import dh from '@/dh'
 import create_remote_table_script from '@/assets/remote_table.py?raw'
+import create_static_table_script from '@/assets/static_table.py?raw'
 import { IdeSession } from '@deephaven/jsapi-types'
 
 export async function initIDESession(): Promise<{
@@ -43,6 +44,7 @@ export async function initTables(ideSession: IdeSession) {
 
       console.log('Creating tables')
       await ideSession.runCode(create_remote_table_script)
+      await ideSession.runCode(create_static_table_script)
 
       resolve()
     })

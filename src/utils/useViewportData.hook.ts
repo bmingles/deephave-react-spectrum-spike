@@ -5,15 +5,16 @@ import { RemoverFn, Table } from '@deephaven/jsapi-types'
 import { ItemModel } from '@/models/item'
 import { toItem } from './item'
 
-export function useViewportData(table: Table | null, viewportSize: number) {
-  const [firstRow, setFirstRow] = React.useState(0)
-  const lastRow = firstRow + viewportSize - 1
-
+export function useViewportData(
+  table: Table | null,
+  keyColumnName: string,
+  viewportSize: number,
+) {
   const getKey = React.useCallback(
     (item: ItemModel) => {
-      return String(firstRow + item._offsetInSnapshot + 1)
+      return String(item[keyColumnName])
     },
-    [firstRow],
+    [keyColumnName],
   )
 
   const viewport = useListData({
@@ -21,21 +22,12 @@ export function useViewportData(table: Table | null, viewportSize: number) {
     initialItems: [],
   })
 
-  const onChangePage = React.useCallback(
-    (direction: -1 | 1) => {
-      viewport.remove(...viewport.items.map((item) => String(item.key)))
-      setFirstRow((firstRow) => firstRow + viewportSize * direction)
+  const setViewport = React.useCallback(
+    (firstRow: number, lastRow: number) => {
+      table?.setViewport(firstRow, lastRow)
     },
-    [viewportSize, viewport],
+    [table],
   )
-
-  const onPrevPage = React.useCallback(() => {
-    onChangePage(-1)
-  }, [onChangePage])
-
-  const onNextPage = React.useCallback(() => {
-    onChangePage(1)
-  }, [onChangePage])
 
   const removerFnRef = React.useRef<RemoverFn[]>([])
 
@@ -48,7 +40,16 @@ export function useViewportData(table: Table | null, viewportSize: number) {
       table.addEventListener(dh.Table.EVENT_ROWADDED, (event) => {
         console.log(event.type, event.detail.row)
         const item = toItem(table)(event.detail.row)
-        viewport.append({ ...item, key: getKey(item) })
+        const key = getKey(item)
+        const itemWithKey = { ...item, key }
+        console.log(key, itemWithKey)
+
+        if (viewport.getItem(key)) {
+          console.log('exists')
+          // viewport.update(key, itemWithKey)
+        } else {
+          viewport.append(itemWithKey)
+        }
       }),
       table.addEventListener(dh.Table.EVENT_ROWREMOVED, (event) => {
         console.log(event.type, event.detail.row)
@@ -66,15 +67,12 @@ export function useViewportData(table: Table | null, viewportSize: number) {
   }, [getKey, viewport, table])
 
   React.useEffect(() => {
-    table?.setViewport(firstRow, lastRow)
-  }, [firstRow, lastRow, table])
+    table?.setViewport(0, viewportSize - 1)
+  }, [table, viewportSize])
 
   return {
     viewport,
-    firstRow,
-    lastRow,
     size: table?.size ?? 0,
-    onPrevPage,
-    onNextPage,
+    setViewport,
   }
 }

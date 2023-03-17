@@ -4,23 +4,45 @@ import List from './List'
 import { useRemoteTable } from '@/utils/useRemoteTable.hook'
 import { useViewportData } from '@/utils/useViewportData.hook'
 
-const VIEWPORT_SIZE = 40
+const VIEWPORT_SIZE = 50
+const ITEM_HEIGHT = 40
 
 function App() {
-  const table = useRemoteTable('remote_table')
-  const { viewport, firstRow, lastRow, size, onPrevPage, onNextPage } =
-    useViewportData(table, VIEWPORT_SIZE)
+  const ref = React.useRef<HTMLDivElement | null>(null)
+
+  const table = useRemoteTable('static_table')
+  const { viewport, size, setViewport } = useViewportData(
+    table,
+    'Int',
+    VIEWPORT_SIZE,
+  )
+
+  React.useEffect(() => {
+    const divEl = ref.current!
+
+    function onScroll() {
+      const firstRow = Math.floor(divEl.scrollTop / ITEM_HEIGHT)
+      console.log('Scroll', firstRow)
+      setViewport(firstRow, firstRow + 10)
+    }
+
+    divEl.addEventListener('scroll', onScroll)
+
+    return () => {
+      divEl.removeEventListener('scroll', onScroll)
+    }
+  }, [setViewport])
 
   return (
     <>
-      <List viewport={viewport} />
-      <Button isDisabled={firstRow === 0} variant="accent" onPress={onPrevPage}>
+      <List ref={ref} viewport={viewport} />
+      {/* <Button isDisabled={firstRow === 0} variant="accent" onPress={onPrevPage}>
         &lt;&lt;
       </Button>
       <Button variant="accent" onPress={onNextPage}>
         &gt;&gt;
-      </Button>
-      {firstRow + 1} - {lastRow + 1} of {size}
+      </Button> */}
+      {size}
     </>
   )
 }
