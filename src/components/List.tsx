@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListView, Item, ListData } from '@adobe/react-spectrum'
-import { ItemModel } from '@/models/item'
+import { ItemModel, KeyedItem } from '@/models/item'
 import { useRemoteTable } from '@/utils/useRemoteTable.hook'
 import { useViewportData } from '@/utils/useViewportData.hook'
 
@@ -46,7 +46,7 @@ export const ListContainer: React.FC = () => {
 }
 
 export interface ListProps {
-  viewport: ListData<ItemModel>
+  viewport: ListData<KeyedItem<ItemModel>>
 }
 
 const List: React.ForwardRefRenderFunction<HTMLDivElement, ListProps> = (
@@ -65,7 +65,7 @@ const List: React.ForwardRefRenderFunction<HTMLDivElement, ListProps> = (
   }, [])
 
   return (
-    <ListView<ItemModel>
+    <ListView<KeyedItem<ItemModel>>
       ref={innerRef}
       aria-label="ListView"
       selectionMode="multiple"
@@ -73,7 +73,7 @@ const List: React.ForwardRefRenderFunction<HTMLDivElement, ListProps> = (
       height="size-3000"
       items={viewport.items}
       onLoadMore={onLoadMore}>
-      {(item) => <Item>{String(item.key)}</Item>}
+      {(item) => <Item>{item.key}</Item>}
     </ListView>
   )
 }

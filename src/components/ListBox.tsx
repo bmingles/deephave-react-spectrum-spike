@@ -1,4 +1,4 @@
-import { ItemModel } from '@/models/item'
+import { ItemModel, KeyedItem } from '@/models/item'
 import { useRemoteTable } from '@/utils/useRemoteTable.hook'
 import { useViewportData } from '@/utils/useViewportData.hook'
 import React from 'react'
@@ -7,13 +7,6 @@ import { Item, ListState, useListState } from 'react-stately'
 import { Node } from '@react-types/shared'
 
 import styles from './ListBox.module.css'
-import { createGetKey } from '@/utils/item'
-
-function createItemRenderer(keyProp: string) {
-  const getKey = createGetKey(keyProp)
-  // eslint-disable-next-line react/display-name
-  return (item: ItemModel) => <Item>{getKey(item)}</Item>
-}
 
 const ITEM_HEIGHT = 40
 const VIEWPORT_SIZE = 20
@@ -27,8 +20,6 @@ const ListBoxContainer: React.FC = () => {
     VIEWPORT_SIZE,
   )
 
-  const renderItem = React.useMemo(() => createItemRenderer(keyProp), [keyProp])
-
   const onScroll = React.useCallback(
     (firstRow: number) => {
       setViewport(firstRow, firstRow + VIEWPORT_SIZE - 1)
@@ -38,14 +29,14 @@ const ListBoxContainer: React.FC = () => {
 
   return (
     <ListBox label="List Box" items={viewport.items} onScroll={onScroll}>
-      {renderItem}
+      {(item: KeyedItem<ItemModel>) => <Item>{item.key}</Item>}
     </ListBox>
   )
 }
 
 export interface ListBoxOptionProps {
-  item: Node<ItemModel>
-  state: ListState<ItemModel>
+  item: Node<KeyedItem<ItemModel>>
+  state: ListState<KeyedItem<ItemModel>>
 }
 
 export const ListBoxOption: React.FC<ListBoxOptionProps> = ({
@@ -65,10 +56,9 @@ export interface ListBoxProps {
   onScroll: (offset: number) => void
 }
 
-const ListBox: React.FC<AriaListBoxProps<ItemModel> & ListBoxProps> = ({
-  onScroll,
-  ...props
-}) => {
+const ListBox: React.FC<
+  AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
+> = ({ onScroll, ...props }) => {
   const ref = React.useRef<HTMLUListElement>(null)
   const firstRowIRef = React.useRef(0)
   const state = useListState(props)

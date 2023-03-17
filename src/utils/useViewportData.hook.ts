@@ -3,6 +3,7 @@ import { useListData } from '@adobe/react-spectrum'
 import dh from '@/dh'
 import { RemoverFn, Table } from '@deephaven/jsapi-types'
 import { createGetKey, toItem } from './item'
+import { ItemModel, KeyedItem } from '@/models/item'
 
 export function useViewportData(
   table: Table | null,
@@ -14,8 +15,7 @@ export function useViewportData(
     [keyColumnName],
   )
 
-  const viewport = useListData({
-    getKey,
+  const viewport = useListData<KeyedItem<ItemModel>>({
     initialItems: [],
   })
 
@@ -36,15 +36,14 @@ export function useViewportData(
     removerFnRef.current = [
       table.addEventListener(dh.Table.EVENT_ROWADDED, (event) => {
         const item = toItem(table)(event.detail.row)
-        const key = getKey(item)
-        const itemWithKey = { ...item, key }
+        const keyedItem = { key: getKey(item), item }
 
-        if (viewport.getItem(key)) {
+        if (viewport.getItem(keyedItem.key)) {
           // console.log(key, 'exists')
           // viewport.update(key, itemWithKey)
         } else {
-          console.log(event.type, key, itemWithKey)
-          viewport.append(itemWithKey)
+          console.log(event.type, keyedItem.key, keyedItem.item)
+          viewport.append(keyedItem)
         }
       }),
       table.addEventListener(dh.Table.EVENT_ROWREMOVED, (event) => {
