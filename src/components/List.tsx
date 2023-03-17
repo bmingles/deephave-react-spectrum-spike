@@ -19,6 +19,7 @@ export const ListContainer: React.FC = () => {
   )
 
   React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const divEl = ref.current!
 
     function onScroll() {
