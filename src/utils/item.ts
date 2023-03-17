@@ -1,6 +1,12 @@
 import { ItemModel } from '@/models/item'
 import { Row, Table } from '@deephaven/jsapi-types'
 
+export function createGetKey(keyProp: string) {
+  return (item: ItemModel) => {
+    return String(item[keyProp])
+  }
+}
+
 export function toItem(table: Table) {
   return (row: Row & { offsetInSnapshot: number }): ItemModel => {
     const item = table.columns.reduce((item, col) => {

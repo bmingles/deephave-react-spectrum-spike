@@ -1,1 +1,1 @@
-export type ItemModel = Record<string, unknown> & { _offsetInSnapshot: number }
+export type ItemModel = Record<string, unknown> & { _offsetInSnapshot?: number }

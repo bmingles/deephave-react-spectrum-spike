@@ -2,18 +2,15 @@ import React from 'react'
 import { useListData } from '@adobe/react-spectrum'
 import dh from '@/dh'
 import { RemoverFn, Table } from '@deephaven/jsapi-types'
-import { ItemModel } from '@/models/item'
-import { toItem } from './item'
+import { createGetKey, toItem } from './item'
 
 export function useViewportData(
   table: Table | null,
   keyColumnName: string,
   viewportSize: number,
 ) {
-  const getKey = React.useCallback(
-    (item: ItemModel) => {
-      return String(item[keyColumnName])
-    },
+  const getKey = React.useMemo(
+    () => createGetKey(keyColumnName),
     [keyColumnName],
   )
 
@@ -38,16 +35,15 @@ export function useViewportData(
 
     removerFnRef.current = [
       table.addEventListener(dh.Table.EVENT_ROWADDED, (event) => {
-        console.log(event.type, event.detail.row)
         const item = toItem(table)(event.detail.row)
         const key = getKey(item)
         const itemWithKey = { ...item, key }
-        console.log(key, itemWithKey)
 
         if (viewport.getItem(key)) {
-          console.log('exists')
+          // console.log(key, 'exists')
           // viewport.update(key, itemWithKey)
         } else {
+          console.log(event.type, key, itemWithKey)
           viewport.append(itemWithKey)
         }
       }),
