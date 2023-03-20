@@ -36,6 +36,7 @@ export const ListBoxContainer: React.FC<ListBoxContainerProps> = ({
     <Component
       label={isWindowed ? 'ListBox (windowed)' : 'ListBox'}
       items={viewport.items}
+      totalItems={table?.size ?? 0}
       onScroll={onScroll}
       selectionMode="single">
       {(item: KeyedItem<ItemModel>) => <Item>{item.key}</Item>}

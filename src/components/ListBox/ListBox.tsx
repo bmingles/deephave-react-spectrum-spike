@@ -7,16 +7,18 @@ import styles from './ListBox.module.css'
 import { useScrollEffect } from '@/utils/useScrollEffect.hook'
 
 export interface ListBoxProps {
+  totalItems: number
   onScroll: (offset: number) => void
 }
 
 export const ListBox: React.FC<
   AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
-> = ({ onScroll, ...props }) => {
+> = ({ onScroll, totalItems, ...props }) => {
   const ref = React.useRef<HTMLDivElement>(null)
   const state = useListState(props)
   const { labelProps, listBoxProps } = useListBox(props, state, ref)
 
+  console.log(totalItems)
   useScrollEffect(ref, ITEM_HEIGHT, onScroll)
 
   return (

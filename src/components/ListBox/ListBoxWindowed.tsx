@@ -1,44 +1,40 @@
 import { ItemModel, KeyedItem } from '@/models/item'
 import React from 'react'
 import { AriaListBoxProps, useListBox } from 'react-aria'
-import { useListState } from 'react-stately'
+import { ListState, useListState } from 'react-stately'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import { ITEM_HEIGHT, ListBoxOption } from './ListBoxOption'
 import { createUseOnScrollCallback } from '@/utils/useOnScrollCallback.hook'
 import styles from './ListBox.module.css'
+import { ListBoxProps } from './ListBox'
+
+const ItemRenderer = ({
+  index,
+  style,
+  data,
+}: ListChildComponentProps<ListState<KeyedItem<ItemModel>>>) => {
+  console.log('data:', data)
+  const item = data.collection.at(index)
+
+  return item ? (
+    <ListBoxOption
+      className={styles.item}
+      key={item.key}
+      style={style}
+      item={item}
+      state={data}
+    />
+  ) : null
+}
 
 const useOnScrollCallback = createUseOnScrollCallback(ITEM_HEIGHT)
 
-export interface ListBoxWindowedProps {
-  onScroll: (offset: number) => void
-}
-
 export const ListBoxWindowed: React.FC<
-  AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxWindowedProps
-> = ({ onScroll, ...props }) => {
+  AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
+> = ({ onScroll, totalItems, ...props }) => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const state = useListState(props)
   const { labelProps, listBoxProps } = useListBox(props, state, ref)
-
-  /** Memoized component so we have closure over `state` */
-  const Item = React.useMemo(
-    () =>
-      // eslint-disable-next-line react/display-name
-      ({ index, style }: ListChildComponentProps) => {
-        const item = state.collection.at(index)
-
-        return item ? (
-          <ListBoxOption
-            className={styles.item}
-            key={item.key}
-            style={style}
-            item={item}
-            state={state}
-          />
-        ) : null
-      },
-    [state],
-  )
 
   const onScrollInternal = useOnScrollCallback(onScroll)
 
@@ -55,10 +51,11 @@ export const ListBoxWindowed: React.FC<
         <FixedSizeList
           height={300}
           width="100%"
-          itemCount={100}
+          itemCount={totalItems}
           itemSize={ITEM_HEIGHT}
+          itemData={state}
           onScroll={onScrollInternal}>
-          {Item}
+          {ItemRenderer}
         </FixedSizeList>
       </div>
     </>
