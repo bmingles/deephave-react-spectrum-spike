@@ -28,13 +28,16 @@ export const ListBoxContainer: React.FC<ListBoxContainerProps> = ({
   const Component = isWindowed ? ListBoxWindowed : ListBox
 
   return (
-    <Component
-      label={isWindowed ? 'ListBox (windowed)' : 'ListBox'}
-      items={viewport.items}
-      totalItems={table?.size ?? 0}
-      onScroll={onScroll}
-      selectionMode="single">
-      {(item: KeyedItem<ItemModel>) => <Item>{item.key}</Item>}
-    </Component>
+    <>
+      {table?.totalSize}
+      <Component
+        label={isWindowed ? 'ListBox (windowed)' : 'ListBox'}
+        items={viewport.items}
+        totalItems={table?.size ?? 0}
+        onScroll={onScroll}
+        selectionMode="single">
+        {(item: KeyedItem<ItemModel>) => <Item>{item.key}</Item>}
+      </Component>
+    </>
   )
 }

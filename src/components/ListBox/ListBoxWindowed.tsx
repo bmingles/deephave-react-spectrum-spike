@@ -14,11 +14,11 @@ const ItemRenderer = ({
   data,
 }: ListChildComponentProps<ListState<KeyedItem<ItemModel>>>) => {
   const item = data.collection.getItem(String(index))
+  console.log(index, item)
 
   return item ? (
     <ListBoxOption
       className={styles.item}
-      key={item.key}
       style={style}
       item={item}
       state={data}
