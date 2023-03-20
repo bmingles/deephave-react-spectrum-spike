@@ -13,7 +13,7 @@ export interface ListBoxProps {
 export const ListBox: React.FC<
   AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
 > = ({ onScroll, ...props }) => {
-  const ref = React.useRef<HTMLUListElement>(null)
+  const ref = React.useRef<HTMLDivElement>(null)
   const state = useListState(props)
   const { labelProps, listBoxProps } = useListBox(props, state, ref)
 
@@ -22,11 +22,11 @@ export const ListBox: React.FC<
   return (
     <>
       <div {...labelProps}>{props.label}</div>
-      <ul className={styles.ul} {...listBoxProps} ref={ref}>
+      <div className={styles.list} {...listBoxProps} ref={ref}>
         {[...state.collection].map((item) => (
           <ListBoxOption key={item.key} item={item} state={state} />
         ))}
-      </ul>
+      </div>
     </>
   )
 }

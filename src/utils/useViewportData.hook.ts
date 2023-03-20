@@ -39,8 +39,8 @@ export function useViewportData(
         const keyedItem = { key: getKey(item), item }
 
         if (viewport.getItem(keyedItem.key)) {
-          // console.log(key, 'exists')
-          // viewport.update(key, itemWithKey)
+          console.log(event.type + ' (update)', keyedItem.key, keyedItem.item)
+          viewport.update(keyedItem.key, keyedItem)
         } else {
           console.log(event.type, keyedItem.key, keyedItem.item)
           viewport.append(keyedItem)

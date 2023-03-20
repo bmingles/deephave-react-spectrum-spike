@@ -3,7 +3,7 @@ import { ListBoxContainer } from './ListBox/ListBoxContainer'
 function App() {
   return (
     <>
-      <ListBoxContainer />
+      <ListBoxContainer isWindowed />
       {/* <ListContainer /> */}
 
       {/* <Button isDisabled={firstRow === 0} variant="accent" onPress={onPrevPage}>
