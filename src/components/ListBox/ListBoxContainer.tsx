@@ -15,17 +15,12 @@ export interface ListBoxContainerProps {
 export const ListBoxContainer: React.FC<ListBoxContainerProps> = ({
   isWindowed,
 }) => {
-  const keyProp = 'Int'
   const table = useRemoteTable('static_table')
-  const { viewport, setViewport } = useViewportData(
-    table,
-    keyProp,
-    VIEWPORT_SIZE,
-  )
+  const { viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = React.useCallback(
     (firstRow: number) => {
-      setViewport(firstRow, firstRow + VIEWPORT_SIZE - 1)
+      setViewport(firstRow)
     },
     [setViewport],
   )

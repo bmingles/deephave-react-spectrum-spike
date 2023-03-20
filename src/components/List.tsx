@@ -27,7 +27,7 @@ export const ListContainer: React.FC = () => {
       if (firstRowIRef.current !== firstRow) {
         firstRowIRef.current = firstRow
         console.log('Scroll', firstRow)
-        setViewport(firstRow, firstRow + VIEWPORT_SIZE - 1)
+        setViewport(firstRow)
       }
     }
 

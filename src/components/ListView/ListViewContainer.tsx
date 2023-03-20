@@ -18,7 +18,7 @@ const ListViewContainer: React.FC<ListViewContainerProps> = () => {
 
   const onScroll = React.useCallback(
     (firstRow: number) => {
-      setViewport(firstRow, firstRow + VIEWPORT_SIZE - 1)
+      setViewport(firstRow)
     },
     [setViewport],
   )

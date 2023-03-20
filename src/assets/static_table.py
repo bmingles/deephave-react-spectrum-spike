@@ -1,6 +1,6 @@
 from deephaven import empty_table
 
-static_table = empty_table(100).update_view(formulas=[
+static_table = empty_table(10000).update_view(formulas=[
     "DateTime=nanosToTime(nanos(currentTime()) + i * 1000000)",
     "String=new String(`a`+i * 1000)",
     "Int=new Integer(i)",
