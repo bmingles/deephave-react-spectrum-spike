@@ -1,18 +1,13 @@
-import { ListBoxContainer } from './ListBox/ListBoxContainer'
+// import { ListBoxContainer } from './ListBox/ListBoxContainer'
+import ListViewContainer from './ListView/ListViewContainer'
+// import ListViewMinimalContainer from './ListView/ListViewMinimalContainer'
 
 function App() {
   return (
     <>
-      <ListBoxContainer isWindowed />
-      {/* <ListContainer /> */}
-
-      {/* <Button isDisabled={firstRow === 0} variant="accent" onPress={onPrevPage}>
-        &lt;&lt;
-      </Button>
-      <Button variant="accent" onPress={onNextPage}>
-        &gt;&gt;
-      </Button> */}
-      {/* {size} */}
+      {/* <ListBoxContainer isWindowed /> */}
+      <ListViewContainer />
+      {/* <ListViewMinimalContainer /> */}
     </>
   )
 }

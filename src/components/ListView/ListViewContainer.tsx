@@ -8,13 +8,8 @@ const VIEWPORT_SIZE = 20
 export interface ListViewContainerProps {}
 
 const ListViewContainer: React.FC<ListViewContainerProps> = () => {
-  const keyProp = 'Int'
   const table = useRemoteTable('static_table')
-  const { viewport, setViewport } = useViewportData(
-    table,
-    keyProp,
-    VIEWPORT_SIZE,
-  )
+  const { viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = React.useCallback(
     (firstRow: number) => {
@@ -23,7 +18,7 @@ const ListViewContainer: React.FC<ListViewContainerProps> = () => {
     [setViewport],
   )
 
-  return <ListView items={viewport.items.slice(0)} onScroll={onScroll} />
+  return <ListView items={viewport.items} onScroll={onScroll} />
 }
 ListViewContainer.displayName = 'ListViewContainer'
 

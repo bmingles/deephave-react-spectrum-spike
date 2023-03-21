@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  Item,
-  ListView as ListViewSpectrum,
-  useAsyncList,
-} from '@adobe/react-spectrum'
+import { Item, ListView as ListViewSpectrum } from '@adobe/react-spectrum'
 import { ItemModel, KeyedItem } from '@/models/item'
 import { useScrollEffect } from '@/utils/useScrollEffect.hook'
 import { ITEM_HEIGHT } from '../ListBox/ListBoxOption'
@@ -52,10 +48,11 @@ const ListView: React.FC<ListViewProps> = ({ items, onScroll }) => {
     <ListViewSpectrum
       ref={setRef}
       aria-label="ListView"
-      selectionMode="single"
-      maxWidth="size-6000"
-      height="size-3000"
+      // height="size-3000"
+      height="250px"
       items={items}
+      maxWidth="size-6000"
+      selectionMode="multiple"
       onLoadMore={() => {
         console.log('onLoadMore')
       }}
