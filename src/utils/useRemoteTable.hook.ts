@@ -7,11 +7,19 @@ export function useRemoteTable(tableName: string) {
   const ideSession = useIdeSession()
 
   React.useEffect(() => {
-    void ideSession.getTable(tableName).then(setTable)
+    let table: Table
+
+    async function getTable() {
+      table = await ideSession.getTable(tableName)
+      setTable(table)
+    }
+
+    void getTable()
+
     return () => {
       table?.close()
     }
-  }, [tableName])
+  }, [ideSession, tableName])
 
   return table
 }
