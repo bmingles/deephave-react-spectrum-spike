@@ -1,3 +1,14 @@
+# React Spectrum in Deephaven
+
+Experimenting with React Spectrum components with Deephaven core table subscriptions.
+
+## Run the App
+
+1. Clone the repo
+2. npm i
+3. Deephaven core needs to be running locally at `http://localhost:10000/`, or you'll need to adjust the vite proxy configuration
+4. npm run dev
+
 ## dh-core.js
 
 - dh-core.js is proxied to `http://localhost:10000/jsapi/dh-core.js`
@@ -40,5 +51,5 @@ optimizeDeps: {
 }
 ```
 
-Then after any local change + build of react-spectruem code,
+Then after any local change + build of react-spectrum code,
 you'll need to re-run `npm run dev`.
