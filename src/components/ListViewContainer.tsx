@@ -5,7 +5,7 @@ import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 import { useRemoteTable } from '@/hooks/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/useViewportData.hook'
 
-const ITEM_SIZE = 32
+const ITEM_SIZE = 40
 const VIEWPORT_SIZE = 10
 const SCROLL_DEBOUNCE_MS = 150
 

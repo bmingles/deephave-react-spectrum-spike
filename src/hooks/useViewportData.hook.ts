@@ -5,6 +5,13 @@ import { RemoverFn, Table } from '@deephaven/jsapi-types'
 import { createRowToKeyedItem } from '@/utils/item'
 import { ItemModel, KeyedItem } from '@/models/item'
 
+/**
+ * For windowing to work, the underlying list needs to have the full number
+ * of items. This is needed internally by react-spectrum so it can calculate
+ * the content area size. This generator can create a range of minimal
+ * `KeyedItem` objects.
+ * @param size
+ */
 function* createInitialItems(
   size: number,
 ): Generator<KeyedItem<ItemModel>, void, unknown> {
@@ -13,17 +20,28 @@ function* createInitialItems(
   }
 }
 
-export function useViewportData(table: Table | null, viewportSize: number) {
-  // const initialItems = React.useMemo(
-  //   () => [...createInitialItems(table?.size ?? 0)],
-  //   [table?.size],
-  // )
-  const initialItems = React.useMemo(() => [...createInitialItems(100000)], [])
-  console.log('initialItems', initialItems.length)
+/**
+ * Safe way to check table size.
+ * @param table
+ */
+function getSizeSafe(table?: Table | null): number {
+  return table && !table.isClosed ? table.size : 0
+}
 
-  const viewport = useListData<KeyedItem<ItemModel>>({
-    initialItems,
-  })
+export function useViewportData(table: Table | null, viewportSize: number) {
+  const viewport = useListData<KeyedItem<ItemModel>>({})
+
+  // We only want this to fire 1x once the table exists.
+  // TODO: this needs some more thought if there are cases where the `table`
+  // instance could change. The challenge here is that `useListData` has no
+  // way to respond to such change, so we'd probably need to manually delete
+  // items in the viewport and then re-initialize.
+  React.useEffect(() => {
+    if (table) {
+      viewport.insert(0, ...createInitialItems(getSizeSafe(table)))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [table])
 
   const [viewportFirstRow, setViewportFirstRow] = React.useState(0)
 
@@ -88,7 +106,7 @@ export function useViewportData(table: Table | null, viewportSize: number) {
 
   return {
     viewport,
-    size: table?.size ?? 0,
+    size: getSizeSafe(table),
     setViewport,
   }
 }
