@@ -1,6 +1,6 @@
 import React from 'react'
-import { useRemoteTable } from '@/utils/useRemoteTable.hook'
-import { useRows } from '@/utils/useRows.hook'
+import { useRemoteTable } from '@/hooks/useRemoteTable.hook'
+import { useRows } from '@/hooks/useRows.hook'
 
 export interface TableProps {}
 

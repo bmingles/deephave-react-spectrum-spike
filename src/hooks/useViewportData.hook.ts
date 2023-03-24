@@ -81,7 +81,9 @@ export function useViewportData(table: Table | null, viewportSize: number) {
   }, [table, viewport, viewportFirstRow])
 
   React.useEffect(() => {
-    table?.setViewport(0, viewportSize - 1)
+    if (table && !table.isClosed) {
+      table.setViewport(0, viewportSize - 1)
+    }
   }, [table, viewportSize])
 
   return {
