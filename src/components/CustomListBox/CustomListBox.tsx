@@ -25,7 +25,6 @@ export const CustomListBox: React.FC<
   const { labelProps, listBoxProps } = useListBox(props, state, ref)
 
   console.log(totalItems)
-  // useScrollEffect(ref, ITEM_HEIGHT, onScroll)
 
   return (
     <>

@@ -3,6 +3,7 @@ import ListViewContainer from '../containers/ListView.container'
 // import ListViewMinimalContainer from './ListView/ListViewMinimalContainer'
 
 import { Flex, Heading, View } from '@adobe/react-spectrum'
+import TableViewContainer from '@/containers/TableView.container'
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
         <View padding={10}>
           <Heading level={2}>List View</Heading>
           <ListViewContainer />
+        </View>
+
+        <View padding={10}>
+          <Heading level={2}>Table View</Heading>
+          <TableViewContainer />
         </View>
         {/* <CustomListBoxContainer isWindowed /> */}
         {/* <ListViewMinimalContainer /> */}
