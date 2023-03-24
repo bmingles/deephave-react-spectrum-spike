@@ -3,28 +3,15 @@ import {
   defaultTheme,
   Provider as SpectrumProvider,
 } from '@adobe/react-spectrum'
-import { Provider as IdeSessionProvider } from '@/utils/useIdeSession.hook'
 import App from './App'
-import { IdeSession } from '@deephaven/jsapi-types'
-import { initIDESession } from '@/utils/initTable'
+import { initTables } from '@/utils/initTable'
+import { Provider as IdeSessionProvider } from '@/hooks/useIdeSession.hook'
+import { useInitIdeSession } from '@/hooks/useInitIdeSession.hook'
 
 export interface AppContainerProps {}
 
 const AppContainer: React.FC<AppContainerProps> = () => {
-  const [ideSession, setIdeSession] = React.useState<IdeSession | null>(null)
-
-  React.useEffect(() => {
-    let dispose: (() => void) | null = null
-
-    initIDESession().then((result) => {
-      dispose = result.dispose
-      setIdeSession(result.ide)
-    })
-
-    return () => {
-      dispose?.()
-    }
-  }, [])
+  const ideSession = useInitIdeSession(initTables)
 
   return ideSession ? (
     <SpectrumProvider theme={defaultTheme}>

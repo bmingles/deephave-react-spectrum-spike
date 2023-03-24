@@ -5,6 +5,10 @@ const Context = React.createContext<IdeSession | null>(null)
 
 export const Provider = Context.Provider
 
+/**
+ * Context hook for an IdeSession.
+ * See `useInitIdeSession` for creating the session.
+ */
 export function useIdeSession(): IdeSession {
   const ideSession = React.useContext(Context)
   if (!ideSession) {

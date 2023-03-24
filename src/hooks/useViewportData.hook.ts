@@ -2,12 +2,27 @@ import React from 'react'
 import { useListData } from '@adobe/react-spectrum'
 import dh from '@/dh'
 import { RemoverFn, Table } from '@deephaven/jsapi-types'
-import { toItem } from './item'
+import { toItem } from '@/utils/item'
 import { ItemModel, KeyedItem } from '@/models/item'
 
+function* createInitialItems(
+  size: number,
+): Generator<KeyedItem<ItemModel>, void, unknown> {
+  for (let i = 0; i < size; ++i) {
+    yield { key: String(i), item: {} }
+  }
+}
+
 export function useViewportData(table: Table | null, viewportSize: number) {
+  // const initialItems = React.useMemo(
+  //   () => [...createInitialItems(table?.size ?? 0)],
+  //   [table?.size],
+  // )
+  const initialItems = React.useMemo(() => [...createInitialItems(100000)], [])
+  console.log('initialItems', initialItems.length)
+
   const viewport = useListData<KeyedItem<ItemModel>>({
-    initialItems: [],
+    initialItems,
   })
 
   const [viewportFirstRow, setViewportFirstRow] = React.useState(0)
@@ -54,7 +69,13 @@ export function useViewportData(table: Table | null, viewportSize: number) {
       // }),
       table.addEventListener(dh.Table.EVENT_UPDATED, (event) => {
         const { offset, rows } = event.detail
-        console.log('UPDATED', offset, rows)
+        console.groupCollapsed(
+          'UPDATED:',
+          offset,
+          '-',
+          offset + rows.length - 1,
+        )
+        console.log('rows', offset, rows)
 
         for (const row of rows) {
           const item = toItem(table)(row)
@@ -68,6 +89,8 @@ export function useViewportData(table: Table | null, viewportSize: number) {
             viewport.append(keyedItem)
           }
         }
+
+        console.groupEnd()
       }),
     ]
 

@@ -1,8 +1,11 @@
 import React from 'react'
-import { Item, ListView as ListViewSpectrum } from '@adobe/react-spectrum'
+import {
+  Item,
+  ListBox,
+  ListView as ListViewSpectrum,
+} from '@adobe/react-spectrum'
 import { ItemModel, KeyedItem } from '@/models/item'
-import { useScrollEffect } from '@/utils/useScrollEffect.hook'
-import { ITEM_HEIGHT } from '../ListBox/ListBoxOption'
+import { useScrollEffect } from '@/hooks/useScrollEffect.hook'
 
 export interface ListViewProps {
   items: KeyedItem<ItemModel>[]
@@ -21,48 +24,41 @@ const ListView: React.FC<ListViewProps> = ({ items, onScroll }) => {
     [],
   )
 
-  useScrollEffect(listRef, ITEM_HEIGHT, onScroll)
+  useScrollEffect(listRef, 32, onScroll)
 
-  // const aList = useAsyncList<KeyedItem<ItemModel>>({
-  //   async load({ signal, cursor = '0' }) {
-  //     console.log('cursor', cursor)
+  // return (
+  //   <ListBox
+  //     ref={setRef}
+  //     aria-label="Pick an animal"
+  //     height="250px"
+  //     items={items}
+  //     selectionMode="multiple"
+  //     width="size-6000">
+  //     {(item) => <Item key={item.key}>{String(item.key)}</Item>}
+  //   </ListBox>
+  // )
 
-  //     await Promise.resolve()
-
-  //     return new Promise((resolve) => {
-  //       setTimeout(() => {
-  //         resolve({
-  //           items: new Array(20)
-  //             .fill('')
-  //             .map((_, i) => ({ key: String(i + Number(cursor)), item: {} })),
-  //           cursor: String(Number(cursor) + 20),
-  //         })
-  //       }, 500)
-  //     })
-  //   },
-  // })
-
-  // console.log(aList)
-
-  return (
-    <ListViewSpectrum
-      ref={setRef}
-      aria-label="ListView"
-      // height="size-3000"
-      height="250px"
-      items={items}
-      maxWidth="size-6000"
-      selectionMode="multiple"
-      onLoadMore={() => {
-        console.log('onLoadMore')
-      }}
-      // items={aList.items}
-      // loadingState={aList.loadingState}
-      // onLoadMore={aList.loadMore}
-    >
-      {(item) => <Item key={item.key}>{String(item.key)}</Item>}
-    </ListViewSpectrum>
-  )
+  {
+    return (
+      <ListViewSpectrum
+        ref={setRef}
+        aria-label="ListView"
+        // height="size-3000"
+        height="250px"
+        items={items}
+        maxWidth="size-6000"
+        selectionMode="multiple"
+        onLoadMore={() => {
+          console.log('onLoadMore')
+        }}
+        // items={aList.items}
+        // loadingState={aList.loadingState}
+        // onLoadMore={aList.loadMore}
+      >
+        {(item) => <Item key={item.key}>{String(item.key)}</Item>}
+      </ListViewSpectrum>
+    )
+  }
 }
 
 ListView.displayName = 'ListView'
