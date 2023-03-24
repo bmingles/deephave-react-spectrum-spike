@@ -16,7 +16,7 @@ export function useScrollEffect<T extends HTMLElement>(
 
       if (firstItemIndexRef.current !== firstRow) {
         firstItemIndexRef.current = firstRow
-        console.log('Scroll', firstRow)
+        console.log('Scroll', firstRow, divEl.scrollTop)
         onScroll(firstRow)
       }
     }
