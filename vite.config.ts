@@ -7,6 +7,9 @@ const proxyTarget = 'http://localhost:10000'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // optimizeDeps: {
+  //   force: true,
+  // },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
