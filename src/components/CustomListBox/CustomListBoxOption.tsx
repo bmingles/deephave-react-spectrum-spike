@@ -6,14 +6,18 @@ import { Node } from '@react-types/shared'
 
 export const ITEM_HEIGHT = 40
 
-export interface ListBoxOptionProps {
+export interface CustomListBoxOptionProps {
   className?: string
   item: Node<KeyedItem<ItemModel>>
   state: ListState<KeyedItem<ItemModel>>
   style?: React.CSSProperties
 }
 
-export const ListBoxOption: React.FC<ListBoxOptionProps> = ({
+/**
+ * Custom list box option using `react-aria` for accessibility and
+ * `react-stately` for state management.
+ */
+export const CustomListBoxOption: React.FC<CustomListBoxOptionProps> = ({
   className,
   item,
   state,

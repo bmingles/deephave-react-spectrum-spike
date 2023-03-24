@@ -3,10 +3,10 @@ import React from 'react'
 import { AriaListBoxProps, useListBox } from 'react-aria'
 import { ListState, useListState } from 'react-stately'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
-import { ITEM_HEIGHT, ListBoxOption } from './ListBoxOption'
-import { createUseOnScrollCallback } from '@/utils/useOnScrollCallback.hook'
-import styles from './ListBox.module.css'
-import { ListBoxProps } from './ListBox'
+import { ITEM_HEIGHT, CustomListBoxOption } from './CustomListBoxOption'
+import { createUseOnScrollCallback } from '@/hooks/useOnScrollCallback.hook'
+import styles from './CustomListBox.module.css'
+import { CustomListBoxProps } from './CustomListBox'
 
 const ItemRenderer = ({
   index,
@@ -17,7 +17,7 @@ const ItemRenderer = ({
   console.log(index, item)
 
   return item ? (
-    <ListBoxOption
+    <CustomListBoxOption
       className={styles.item}
       style={style}
       item={item}
@@ -28,8 +28,12 @@ const ItemRenderer = ({
 
 const useOnScrollCallback = createUseOnScrollCallback(ITEM_HEIGHT)
 
-export const ListBoxWindowed: React.FC<
-  AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
+/**
+ * Custom list box component using `react-aria` for accessibility and
+ * `react-window` for virtualization.
+ */
+export const CustomListBoxWindowed: React.FC<
+  AriaListBoxProps<KeyedItem<ItemModel>> & CustomListBoxProps
 > = ({ onScroll, totalItems, ...props }) => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const state = useListState(props)
@@ -60,4 +64,4 @@ export const ListBoxWindowed: React.FC<
     </>
   )
 }
-ListBoxWindowed.displayName = 'ListBox'
+CustomListBoxWindowed.displayName = 'CustomListBoxWindowed'

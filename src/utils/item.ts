@@ -1,22 +1,19 @@
-import { ItemModel } from '@/models/item'
+import { ItemModel, KeyedItem } from '@/models/item'
 import { Row, Table } from '@deephaven/jsapi-types'
 
-export function toItem(table: Table) {
-  return (row: Row & { offsetInSnapshot: number }): ItemModel => {
+/**
+ * Create a `rowToKeyedItem` function.
+ * @param table
+ */
+export function createRowToKeyedItem(table: Table, offset: number) {
+  return function rowToKeyedItem(
+    row: Row & { offsetInSnapshot: number },
+  ): KeyedItem<ItemModel> {
     const item = table.columns.reduce((item, col) => {
       item[col.name] = row.get(col)
       return item
     }, {} as ItemModel)
 
-    item._offsetInSnapshot = row.offsetInSnapshot
-
-    return item
+    return { key: String(offset + row.offsetInSnapshot), item }
   }
-}
-
-export function toItemList(
-  table: Table,
-  rows: (Row & { offsetInSnapshot: number })[],
-): ItemModel[] {
-  return rows.map(toItem(table))
 }

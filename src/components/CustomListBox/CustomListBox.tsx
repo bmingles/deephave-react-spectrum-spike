@@ -2,17 +2,17 @@ import { ItemModel, KeyedItem } from '@/models/item'
 import React from 'react'
 import { AriaListBoxProps, useListBox } from 'react-aria'
 import { useListState } from 'react-stately'
-import { ITEM_HEIGHT, ListBoxOption } from './ListBoxOption'
-import styles from './ListBox.module.css'
-import { useScrollEffect } from '@/utils/useScrollEffect.hook'
+import { ITEM_HEIGHT, CustomListBoxOption } from './CustomListBoxOption'
+import styles from './CustomListBox.module.css'
+import { useScrollEffect } from '@/hooks/useScrollEffect.hook'
 
-export interface ListBoxProps {
+export interface CustomListBoxProps {
   totalItems: number
   onScroll: (offset: number) => void
 }
 
-export const ListBox: React.FC<
-  AriaListBoxProps<KeyedItem<ItemModel>> & ListBoxProps
+export const CustomListBox: React.FC<
+  AriaListBoxProps<KeyedItem<ItemModel>> & CustomListBoxProps
 > = ({ onScroll, totalItems, ...props }) => {
   const ref = React.useRef<HTMLDivElement>(null)
   const state = useListState(props)
@@ -26,10 +26,10 @@ export const ListBox: React.FC<
       <div {...labelProps}>{props.label}</div>
       <div className={styles.list} {...listBoxProps} ref={ref}>
         {[...state.collection].map((item) => (
-          <ListBoxOption key={item.key} item={item} state={state} />
+          <CustomListBoxOption key={item.key} item={item} state={state} />
         ))}
       </div>
     </>
   )
 }
-ListBox.displayName = 'ListBox'
+CustomListBox.displayName = 'CustomListBox'

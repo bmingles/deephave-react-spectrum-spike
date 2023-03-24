@@ -1,18 +1,21 @@
 import React from 'react'
-import { useRemoteTable } from '@/utils/useRemoteTable.hook'
-import { useViewportData } from '@/utils/useViewportData.hook'
-import { ListBox } from './ListBox'
+import { useRemoteTable } from '@/hooks/useRemoteTable.hook'
+import { useViewportData } from '@/hooks/useViewportData.hook'
+import { CustomListBox } from './CustomListBox'
 import { ItemModel, KeyedItem } from '@/models/item'
 import { Item } from 'react-stately'
-import { ListBoxWindowed } from './ListBoxWindowed'
+import { CustomListBoxWindowed } from './CustomListBoxWindowed'
 
 const VIEWPORT_SIZE = 20
 
-export interface ListBoxContainerProps {
+export interface CustomListBoxContainerProps {
   isWindowed: boolean
 }
 
-export const ListBoxContainer: React.FC<ListBoxContainerProps> = ({
+/**
+ * Container component for a `CustomListBox` or `CustomListBoxWindowed`
+ */
+export const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
   isWindowed,
 }) => {
   const table = useRemoteTable('static_table')
@@ -25,7 +28,7 @@ export const ListBoxContainer: React.FC<ListBoxContainerProps> = ({
     [setViewport],
   )
 
-  const Component = isWindowed ? ListBoxWindowed : ListBox
+  const Component = isWindowed ? CustomListBoxWindowed : CustomListBox
 
   return (
     <>
