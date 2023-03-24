@@ -1,5 +1,5 @@
-import ListBoxContainer from './ListBoxContainer'
-import ListViewContainer from './ListViewContainer'
+import ListBoxContainer from '../containers/ListBox.container'
+import ListViewContainer from '../containers/ListView.container'
 // import ListViewMinimalContainer from './ListView/ListViewMinimalContainer'
 
 import { Flex, Heading, View } from '@adobe/react-spectrum'

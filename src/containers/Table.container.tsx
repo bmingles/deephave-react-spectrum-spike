@@ -4,7 +4,7 @@ import { useRows } from '@/hooks/useRows.hook'
 
 export interface TableProps {}
 
-const Table: React.FC<TableProps> = () => {
+const TableContainer: React.FC<TableProps> = () => {
   const table = useRemoteTable('remote_table')
   const rows = useRows(table, 0, 9)
 
@@ -29,6 +29,6 @@ const Table: React.FC<TableProps> = () => {
     </table>
   )
 }
-Table.displayName = 'Table'
+TableContainer.displayName = 'Table'
 
-export default Table
+export default TableContainer

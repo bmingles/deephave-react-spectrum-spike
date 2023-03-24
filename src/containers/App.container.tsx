@@ -3,7 +3,7 @@ import {
   defaultTheme,
   Provider as SpectrumProvider,
 } from '@adobe/react-spectrum'
-import App from './App'
+import App from '../components/App'
 import { initTables } from '@/utils/initTable'
 import { Provider as IdeSessionProvider } from '@/hooks/useIdeSession.hook'
 import { useInitIdeSession } from '@/hooks/useInitIdeSession.hook'
