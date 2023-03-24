@@ -1,9 +1,9 @@
 import React from 'react'
 import { Item, ListBox } from '@adobe/react-spectrum'
 import { useOnScrollOffsetChangeCallback } from '@/hooks/useOnScrollOffsetChangeCallback.hook'
-import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
-import { useRemoteTable } from '@/hooks/useRemoteTable.hook'
-import { useViewportData } from '@/hooks/useViewportData.hook'
+import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrollRef.hook'
+import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
+import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 
 const ITEM_SIZE = 32
 const VIEWPORT_SIZE = 10
@@ -21,7 +21,7 @@ const ListBoxContainer: React.FC = () => {
     setViewport,
     SCROLL_DEBOUNCE_MS,
   )
-  const ref = useOnScrollRef(onScroll)
+  const ref = useSpectrumOnScrollRef(onScroll)
 
   return (
     <>

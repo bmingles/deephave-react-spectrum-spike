@@ -2,7 +2,12 @@ import React from 'react'
 import { Table } from '@deephaven/jsapi-types'
 import { useIdeSession } from './useIdeSession.hook'
 
-export function useRemoteTable(tableName: string) {
+/**
+ * Synchronously get a dh Table instance with the given name.
+ * Returns null if it has not been loaded yet.
+ * @param tableName
+ */
+export function useRemoteTable(tableName: string): Table | null {
   const [table, setTable] = React.useState<Table | null>(null)
   const ideSession = useIdeSession()
 

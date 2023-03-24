@@ -5,8 +5,8 @@ import {
 } from '@adobe/react-spectrum'
 import App from '../components/App'
 import { initTables } from '@/utils/initTable'
-import { Provider as IdeSessionProvider } from '@/hooks/useIdeSession.hook'
-import { useInitIdeSession } from '@/hooks/useInitIdeSession.hook'
+import { Provider as IdeSessionProvider } from '@/hooks/dh/useIdeSession.hook'
+import { useInitIdeSession } from '@/hooks/dh/useInitIdeSession.hook'
 
 export interface AppContainerProps {}
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useRemoteTable } from '@/hooks/useRemoteTable.hook'
-import { useViewportData } from '@/hooks/useViewportData.hook'
+import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
+import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { CustomListBox } from '../components/CustomListBox/CustomListBox'
 import { ItemModel, KeyedItem } from '@/models/item'
 import { Item } from 'react-stately'

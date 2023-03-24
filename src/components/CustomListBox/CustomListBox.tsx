@@ -4,7 +4,8 @@ import { AriaListBoxProps, useListBox } from 'react-aria'
 import { useListState } from 'react-stately'
 import { ITEM_HEIGHT, CustomListBoxOption } from './CustomListBoxOption'
 import styles from './CustomListBox.module.css'
-import { useScrollEffect } from '@/hooks/useScrollEffect.hook'
+import { useOnScrollOffsetChangeCallback } from '@/hooks/useOnScrollOffsetChangeCallback.hook'
+import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 
 export interface CustomListBoxProps {
   totalItems: number
@@ -14,12 +15,17 @@ export interface CustomListBoxProps {
 export const CustomListBox: React.FC<
   AriaListBoxProps<KeyedItem<ItemModel>> & CustomListBoxProps
 > = ({ onScroll, totalItems, ...props }) => {
-  const ref = React.useRef<HTMLDivElement>(null)
+  const onOffsetChange = useOnScrollOffsetChangeCallback(
+    ITEM_HEIGHT,
+    onScroll,
+    150,
+  )
+  const ref = useOnScrollRef<HTMLDivElement>(onOffsetChange)
   const state = useListState(props)
   const { labelProps, listBoxProps } = useListBox(props, state, ref)
 
   console.log(totalItems)
-  useScrollEffect(ref, ITEM_HEIGHT, onScroll)
+  // useScrollEffect(ref, ITEM_HEIGHT, onScroll)
 
   return (
     <>

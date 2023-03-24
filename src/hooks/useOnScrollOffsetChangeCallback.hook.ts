@@ -2,7 +2,7 @@ import React from 'react'
 
 /**
  * Returns a callback that transforms a scroll event handler to an offset
- * change handler.
+ * change handler. Supports an optional debounce as well.
  * @param offsetSize
  * @param onChange
  * @param debounceMs

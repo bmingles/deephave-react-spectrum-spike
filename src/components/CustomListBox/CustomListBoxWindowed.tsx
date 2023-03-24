@@ -4,7 +4,7 @@ import { AriaListBoxProps, useListBox } from 'react-aria'
 import { ListState, useListState } from 'react-stately'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import { ITEM_HEIGHT, CustomListBoxOption } from './CustomListBoxOption'
-import { createUseOnScrollCallback } from '@/hooks/useOnScrollCallback.hook'
+import { createUseOnScrollCallback } from '@/hooks/reactWindow/useOnScrollCallback.hook'
 import styles from './CustomListBox.module.css'
 import { CustomListBoxProps } from './CustomListBox'
 

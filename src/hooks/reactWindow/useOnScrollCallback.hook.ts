@@ -1,6 +1,10 @@
 import React from 'react'
 import { ListOnScrollProps } from 'react-window'
 
+/**
+ * Create a `react-window` compatible `useOnScrollCallback` hook.
+ * @param itemHeight
+ */
 export function createUseOnScrollCallback(itemHeight: number) {
   /**
    * onScroll callback for react-window FixedSizeList. Keeps a ref to the

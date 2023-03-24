@@ -2,6 +2,12 @@ import dh from '@/dh'
 import { RemoverFn, Row, Table } from '@deephaven/jsapi-types'
 import React from 'react'
 
+/**
+ * Returns the rows for the given table viewport.
+ * @param table
+ * @param firstRow
+ * @param lastRow
+ */
 export function useRows(
   table: Table | null,
   firstRow: number,
