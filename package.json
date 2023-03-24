@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "devforce": "vite --force",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predev": "relative-deps",
+    "prepare": "relative-deps"
   },
   "dependencies": {
     "@adobe/react-spectrum": "^3.25.1",
+    "@react-spectrum/listbox": "^3.9.1",
+    "@react-stately/list": "^3.7.0",
     "react": "^18.2.0",
     "react-aria": "^3.23.1",
     "react-dom": "^18.2.0",
@@ -28,7 +33,16 @@
     "eslint": "^8.36.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "relative-deps": "^1.0.7",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
+  },
+  "relativeDependencies": {
+    "@adobe/react-spectrum": "../../thirdparty/react-spectrum-bmingles/packages/@adobe/react-spectrum",
+    "@react-aria/virtualizer": "../../thirdparty/react-spectrum-bmingles/packages/@react-aria/virtualizer",
+    "@react-spectrum/listbox": "../../thirdparty/react-spectrum-bmingles/packages/@react-spectrum/listbox",
+    "@react-stately/collections": "../../thirdparty/react-spectrum-bmingles/packages/@react-stately/collections",
+    "@react-stately/layout": "../../thirdparty/react-spectrum-bmingles/packages/@react-stately/layout",
+    "@react-stately/list": "../../thirdparty/react-spectrum-bmingles/packages/@react-stately/list"
   }
 }
