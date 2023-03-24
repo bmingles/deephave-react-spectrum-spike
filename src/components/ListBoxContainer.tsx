@@ -14,7 +14,7 @@ const SCROLL_DEBOUNCE_MS = 150
  */
 const ListBoxContainer: React.FC = () => {
   const table = useRemoteTable('static_table')
-  const { viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
+  const { size, viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = useOnScrollOffsetChangeCallback(
     ITEM_SIZE,
@@ -24,15 +24,18 @@ const ListBoxContainer: React.FC = () => {
   const ref = useOnScrollRef(onScroll)
 
   return (
-    <ListBox
-      ref={ref}
-      aria-label="ListBox"
-      height="250px"
-      items={viewport.items}
-      maxWidth="size-6000"
-      selectionMode="multiple">
-      {(item) => <Item key={item.key}>{String(item.key)}</Item>}
-    </ListBox>
+    <>
+      {size.toLocaleString()}
+      <ListBox
+        ref={ref}
+        aria-label="ListBox"
+        height="250px"
+        items={viewport.items}
+        maxWidth="size-6000"
+        selectionMode="multiple">
+        {(item) => <Item key={item.key}>{item.item ? item.key : '...'}</Item>}
+      </ListBox>
+    </>
   )
 }
 

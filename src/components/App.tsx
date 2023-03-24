@@ -2,17 +2,24 @@ import ListBoxContainer from './ListBoxContainer'
 import ListViewContainer from './ListViewContainer'
 // import ListViewMinimalContainer from './ListView/ListViewMinimalContainer'
 
+import { Flex, Heading, View } from '@adobe/react-spectrum'
+
 function App() {
   return (
-    <>
-      <h2>List Box</h2>
-      <ListBoxContainer />
+    <View minHeight="100vh">
+      <Flex direction="column" alignItems="stretch">
+        <View padding={10}>
+          <Heading level={2}>List Box</Heading>
+          <ListBoxContainer />
+        </View>
 
-      <h2>List View</h2>
-      <ListViewContainer />
-      {/* <ListViewMinimalContainer /> */}
+        <View padding={10}>
+          <Heading level={2}>List View</Heading>
+          <ListViewContainer />
+        </View>
+        {/* <ListViewMinimalContainer /> */}
 
-      {/* <h2>More</h2>
+        {/* <h2>More</h2>
       <ListViewContainer />
       <ListViewContainer />
       <ListViewContainer />
@@ -23,7 +30,8 @@ function App() {
       <ListViewContainer />
       <ListViewContainer />
       <ListViewContainer /> */}
-    </>
+      </Flex>
+    </View>
   )
 }
 

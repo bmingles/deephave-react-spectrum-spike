@@ -14,7 +14,7 @@ const AppContainer: React.FC<AppContainerProps> = () => {
   const ideSession = useInitIdeSession(initTables)
 
   return ideSession ? (
-    <SpectrumProvider theme={defaultTheme}>
+    <SpectrumProvider theme={defaultTheme} colorScheme="dark">
       <IdeSessionProvider value={ideSession}>
         <App />
       </IdeSessionProvider>

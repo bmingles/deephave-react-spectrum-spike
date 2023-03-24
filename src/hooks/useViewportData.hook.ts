@@ -16,7 +16,7 @@ function* createInitialItems(
   size: number,
 ): Generator<KeyedItem<ItemModel>, void, unknown> {
   for (let i = 0; i < size; ++i) {
-    yield { key: String(i), item: {} }
+    yield { key: String(i) }
   }
 }
 
