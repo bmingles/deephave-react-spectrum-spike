@@ -9,6 +9,11 @@ const ITEM_SIZE = 40
 const VIEWPORT_SIZE = 200
 const SCROLL_DEBOUNCE_MS = 150
 
+export const meta = {
+  title: 'List View',
+  slug: 'list-view',
+}
+
 export interface ListViewContainerProps {}
 
 /**

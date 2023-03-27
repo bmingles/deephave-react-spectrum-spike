@@ -15,6 +15,8 @@ import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 import { useMappedRef } from '@/hooks/useMappedRef.hook'
 
+export const meta = { title: 'Table View', slug: 'table-view' }
+
 const ITEM_SIZE = 41
 const VIEWPORT_SIZE = 200
 const SCROLL_DEBOUNCE_MS = 150

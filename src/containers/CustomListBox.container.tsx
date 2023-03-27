@@ -6,17 +6,19 @@ import { ItemModel, KeyedItem } from '@/models/item'
 import { Item } from 'react-stately'
 import { CustomListBoxWindowed } from '../components/CustomListBox/CustomListBoxWindowed'
 
+export const meta = { title: 'List Box (custom)', slug: 'list-box-custom' }
+
 const VIEWPORT_SIZE = 20
 
 export interface CustomListBoxContainerProps {
-  isWindowed: boolean
+  isWindowed?: boolean
 }
 
 /**
  * Container component for a `CustomListBox` or `CustomListBoxWindowed`
  */
-export const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
-  isWindowed,
+const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
+  isWindowed = true,
 }) => {
   const table = useRemoteTable('static_table')
   const { viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
@@ -44,3 +46,5 @@ export const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
     </>
   )
 }
+
+export default CustomListBoxContainer

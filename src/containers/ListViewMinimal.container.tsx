@@ -5,6 +5,8 @@ import {
   useListData,
 } from '@adobe/react-spectrum'
 
+export const meta = { title: 'List View (minimal)', slug: 'list-view-minimal' }
+
 export interface ListViewMinimalContainerProps {}
 
 const ListViewMinimalContainer: React.FC<

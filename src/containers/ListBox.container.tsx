@@ -5,6 +5,8 @@ import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrol
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 
+export const meta = { title: 'List Box', slug: 'list-box' }
+
 const ITEM_SIZE = 32
 const VIEWPORT_SIZE = 10
 const SCROLL_DEBOUNCE_MS = 150

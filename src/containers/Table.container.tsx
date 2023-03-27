@@ -2,6 +2,8 @@ import React from 'react'
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useRows } from '@/hooks/dh/useRows.hook'
 
+export const meta = { title: 'Table', slug: 'table' }
+
 export interface TableProps {}
 
 const TableContainer: React.FC<TableProps> = () => {
