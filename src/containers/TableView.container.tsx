@@ -59,8 +59,8 @@ const TableViewContainer: React.FC<TableViewContainerProps> = () => {
           <Column key="String" allowsResizing allowsSorting>
             String
           </Column>
-          <Column key="Int">String</Column>
-          <Column key="Boolean">String</Column>
+          {/* <Column key="Int">String</Column>
+          <Column key="Boolean">String</Column> */}
         </TableHeader>
         <TableBody items={viewport.items}>
           {(item) => (
@@ -75,6 +75,6 @@ const TableViewContainer: React.FC<TableViewContainerProps> = () => {
     </View>
   )
 }
-TableViewContainer.displayName = 'ListViewContainer'
+TableViewContainer.displayName = 'TableViewContainer'
 
 export default TableViewContainer
