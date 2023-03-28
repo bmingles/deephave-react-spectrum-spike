@@ -9,7 +9,7 @@ import { TABLE } from '@/utils/initTable'
 export const meta = { title: 'List Box', slug: 'list-box' }
 
 const ITEM_SIZE = 32
-const VIEWPORT_SIZE = 10
+const VIEWPORT_SIZE = 200
 const SCROLL_DEBOUNCE_MS = 150
 
 /**

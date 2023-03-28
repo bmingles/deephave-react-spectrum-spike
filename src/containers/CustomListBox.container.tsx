@@ -9,7 +9,7 @@ import { TABLE } from '@/utils/initTable'
 
 export const meta = { title: 'List Box (custom)', slug: 'list-box-custom' }
 
-const VIEWPORT_SIZE = 20
+const VIEWPORT_SIZE = 100
 
 export interface CustomListBoxContainerProps {
   isWindowed?: boolean
