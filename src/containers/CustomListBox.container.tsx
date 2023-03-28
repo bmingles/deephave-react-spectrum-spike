@@ -5,6 +5,7 @@ import { CustomListBox } from '../components/CustomListBox/CustomListBox'
 import { ItemModel, KeyedItem } from '@/models/item'
 import { Item } from 'react-stately'
 import { CustomListBoxWindowed } from '../components/CustomListBox/CustomListBoxWindowed'
+import { TABLE } from '@/utils/initTable'
 
 export const meta = { title: 'List Box (custom)', slug: 'list-box-custom' }
 
@@ -20,7 +21,7 @@ export interface CustomListBoxContainerProps {
 const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
   isWindowed = true,
 }) => {
-  const table = useRemoteTable('static_table')
+  const table = useRemoteTable(TABLE.STATIC_TABLE_100_000)
   const { viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = React.useCallback(

@@ -5,6 +5,7 @@ import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { useMappedRef } from '@/hooks/useMappedRef.hook'
 import { ReactSpectrumComponent } from '@/utils/spectrum'
+import { TABLE } from '@/utils/initTable'
 
 export const meta = { title: 'Picker', slug: 'picker' }
 
@@ -22,7 +23,7 @@ function extractPickerButton(containerEl: ReactSpectrumComponent) {
 const PickerContainer: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const table = useRemoteTable('static_table')
+  const table = useRemoteTable(TABLE.STATIC_TABLE_100_000)
   const { size, viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = useOnScrollOffsetChangeCallback(

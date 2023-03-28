@@ -14,6 +14,7 @@ import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 import { useMappedRef } from '@/hooks/useMappedRef.hook'
 import { ReactSpectrumComponent } from '@/utils/spectrum'
+import { TABLE } from '@/utils/initTable'
 
 export const meta = { title: 'Table View', slug: 'table-view' }
 
@@ -27,7 +28,7 @@ export interface TableViewContainerProps {}
  * Virtual scrolling + viewport windowing.
  */
 const TableViewContainer: React.FC<TableViewContainerProps> = () => {
-  const table = useRemoteTable('static_table')
+  const table = useRemoteTable(TABLE.STATIC_TABLE_100_000)
   const { viewport, size, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = useOnScrollOffsetChangeCallback(
@@ -53,8 +54,9 @@ const TableViewContainer: React.FC<TableViewContainerProps> = () => {
         aria-label="ListView"
         height="250px"
         maxWidth="size-6000"
-        selectionMode="multiple"
-        onSortChange={(arg) => console.log(arg)}>
+        selectionMode="none"
+        // onSortChange={(arg) => console.log(arg)}
+      >
         <TableHeader>
           <Column key="String" allowsResizing allowsSorting>
             String

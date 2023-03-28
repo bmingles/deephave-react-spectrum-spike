@@ -1,6 +1,6 @@
 from deephaven import empty_table
 
-static_table = empty_table(100000).update_view(formulas=[
+formulas = [
     "DateTime=nanosToTime(nanos(currentTime()) + i * 1000000)",
     "String=new String(`a`+i * 1000)",
     "Int=new Integer(i)",
@@ -21,4 +21,8 @@ static_table = empty_table(100000).update_view(formulas=[
     "Char2= new Character((char) ((i%26)+97))",
     "Short2=new Short(Integer.toString(i%32767))",
     "Byte2= new java.lang.Byte(Integer.toString(i%127))",
-])
+]
+
+static_table_1_000 = empty_table(1000).update_view(formulas)
+
+static_table_100_000 = empty_table(100000).update_view(formulas)

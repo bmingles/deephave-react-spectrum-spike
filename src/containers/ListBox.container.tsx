@@ -4,6 +4,7 @@ import { useOnScrollOffsetChangeCallback } from '@/hooks/useOnScrollOffsetChange
 import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrollRef.hook'
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
+import { TABLE } from '@/utils/initTable'
 
 export const meta = { title: 'List Box', slug: 'list-box' }
 
@@ -15,7 +16,7 @@ const SCROLL_DEBOUNCE_MS = 150
  * Virtual scrolling + viewport windowing.
  */
 const ListBoxContainer: React.FC = () => {
-  const table = useRemoteTable('static_table')
+  const table = useRemoteTable(TABLE.STATIC_TABLE_100_000)
   const { size, viewport, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = useOnScrollOffsetChangeCallback(

@@ -4,6 +4,7 @@ import { useOnScrollOffsetChangeCallback } from '@/hooks/useOnScrollOffsetChange
 import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrollRef.hook'
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
+import { TABLE } from '@/utils/initTable'
 
 const ITEM_SIZE = 40
 const VIEWPORT_SIZE = 200
@@ -20,7 +21,7 @@ export interface ListViewContainerProps {}
  * Virtual scrolling + viewport windowing.
  */
 const ListViewContainer: React.FC<ListViewContainerProps> = () => {
-  const table = useRemoteTable('static_table')
+  const table = useRemoteTable(TABLE.STATIC_TABLE_100_000)
   const { viewport, size, setViewport } = useViewportData(table, VIEWPORT_SIZE)
 
   const onScroll = useOnScrollOffsetChangeCallback(
