@@ -47,6 +47,9 @@ export function useViewportData(table: Table | null, viewportSize: number) {
 
   const setViewport = React.useCallback(
     (firstRow: number) => {
+      // adjust our viewport to have leading items
+      firstRow = Math.max(0, firstRow - Math.floor(viewportSize / 2))
+
       const lastRow = firstRow + viewportSize - 1
       table?.setViewport(firstRow, lastRow)
       setViewportFirstRow(firstRow)
