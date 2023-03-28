@@ -3,6 +3,7 @@ const metaMap = import.meta.glob('../containers/**', { eager: true })
 export interface Meta {
   title: string
   slug: string
+  category?: string
 }
 
 export interface HasMeta {

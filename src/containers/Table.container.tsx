@@ -1,8 +1,9 @@
 import React from 'react'
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useRows } from '@/hooks/dh/useRows.hook'
+import { Meta } from '@/utils/routes'
 
-export const meta = { title: 'Table', slug: 'table' }
+export const meta: Meta = { title: 'Table', slug: 'table', category: 'custom' }
 
 export interface TableProps {}
 

@@ -6,8 +6,13 @@ import { ItemModel, KeyedItem } from '@/models/item'
 import { Item } from 'react-stately'
 import { CustomListBoxWindowed } from '../components/CustomListBox/CustomListBoxWindowed'
 import { TABLE } from '@/utils/initTable'
+import { Meta } from '@/utils/routes'
 
-export const meta = { title: 'List Box (custom)', slug: 'list-box-custom' }
+export const meta: Meta = {
+  title: 'List Box (react-window)',
+  slug: 'list-box-custom',
+  category: 'custom',
+}
 
 const VIEWPORT_SIZE = 100
 
@@ -37,7 +42,7 @@ const CustomListBoxContainer: React.FC<CustomListBoxContainerProps> = ({
     <>
       {table?.totalSize}
       <Component
-        label={isWindowed ? 'ListBox (windowed)' : 'ListBox'}
+        label={isWindowed ? 'ListBox (react-window)' : 'ListBox (custom)'}
         items={viewport.items}
         totalItems={table?.size ?? 0}
         onScroll={onScroll}
