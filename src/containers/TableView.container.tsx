@@ -9,11 +9,11 @@ import {
   View,
 } from '@adobe/react-spectrum'
 import { useOnScrollOffsetChangeCallback } from '@/hooks/useOnScrollOffsetChangeCallback.hook'
-import { ReactSpectrumComponent } from '@/hooks/reactSpectrum/useSpectrumOnScrollRef.hook'
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 import { useMappedRef } from '@/hooks/useMappedRef.hook'
+import { ReactSpectrumComponent } from '@/utils/spectrum'
 
 export const meta = { title: 'Table View', slug: 'table-view' }
 
