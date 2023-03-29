@@ -5,8 +5,13 @@ import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrol
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { TABLE } from '@/utils/initTable'
+import { Meta } from '@/utils/routes'
 
-export const meta = { title: 'List Box', slug: 'list-box' }
+export const meta: Meta = {
+  title: 'List Box',
+  slug: 'list-box',
+  category: 'spectrum',
+}
 
 const ITEM_SIZE = 32
 const VIEWPORT_SIZE = 200
@@ -28,7 +33,7 @@ const ListBoxContainer: React.FC = () => {
 
   return (
     <>
-      {size.toLocaleString()}
+      {`${size.toLocaleString()} items`}
       <ListBox
         ref={ref}
         aria-label="ListBox"

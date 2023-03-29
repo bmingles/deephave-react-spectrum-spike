@@ -9,12 +9,24 @@ export interface SideNavProps {}
 const SideNav: React.FC<SideNavProps> = () => {
   return (
     <nav className={styles.container}>
-      <Heading level={3}>Menu</Heading>
-      {routes.map(({ meta: { slug, title } }) => (
-        <LinkSpectrum key={slug}>
-          <Link to={`/${slug}`}>{title}</Link>
-        </LinkSpectrum>
-      ))}
+      <Heading level={3}>Spectrum</Heading>
+      {routes
+        .filter(
+          (r) => r.meta.category == null || r.meta.category === 'spectrum',
+        )
+        .map(({ meta: { slug, title } }) => (
+          <LinkSpectrum key={slug}>
+            <Link to={`/${slug}`}>{title}</Link>
+          </LinkSpectrum>
+        ))}
+      <Heading level={3}>Custom</Heading>
+      {routes
+        .filter((r) => r.meta.category === 'custom')
+        .map(({ meta: { slug, title } }) => (
+          <LinkSpectrum key={slug}>
+            <Link to={`/${slug}`}>{title}</Link>
+          </LinkSpectrum>
+        ))}
     </nav>
   )
 }

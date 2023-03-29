@@ -15,8 +15,13 @@ import { useOnScrollRef } from '@/hooks/useOnScrollRef.hook'
 import { useMappedRef } from '@/hooks/useMappedRef.hook'
 import { ReactSpectrumComponent } from '@/utils/spectrum'
 import { TABLE } from '@/utils/initTable'
+import { Meta } from '@/utils/routes'
 
-export const meta = { title: 'Table View', slug: 'table-view' }
+export const meta: Meta = {
+  title: 'Table View',
+  slug: 'table-view',
+  category: 'spectrum',
+}
 
 const ITEM_SIZE = 41
 const VIEWPORT_SIZE = 200
@@ -48,7 +53,7 @@ const TableViewContainer: React.FC<TableViewContainerProps> = () => {
 
   return (
     <View>
-      {size.toLocaleString()}
+      {`${size.toLocaleString()} items`}
       <TableView
         ref={ref}
         aria-label="ListView"

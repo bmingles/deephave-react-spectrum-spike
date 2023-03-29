@@ -5,14 +5,16 @@ import { useSpectrumOnScrollRef } from '@/hooks/reactSpectrum/useSpectrumOnScrol
 import { useRemoteTable } from '@/hooks/dh/useRemoteTable.hook'
 import { useViewportData } from '@/hooks/dh/useViewportData.hook'
 import { TABLE } from '@/utils/initTable'
+import { Meta } from '@/utils/routes'
 
 const ITEM_SIZE = 40
 const VIEWPORT_SIZE = 200
 const SCROLL_DEBOUNCE_MS = 150
 
-export const meta = {
+export const meta: Meta = {
   title: 'List View',
   slug: 'list-view',
+  category: 'spectrum',
 }
 
 export interface ListViewContainerProps {}
@@ -34,7 +36,7 @@ const ListViewContainer: React.FC<ListViewContainerProps> = () => {
 
   return (
     <View>
-      {size.toLocaleString()}
+      {`${size.toLocaleString()} items`}
       <ListViewSpectrum
         ref={ref}
         aria-label="ListView"

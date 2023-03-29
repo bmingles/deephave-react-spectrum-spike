@@ -57,17 +57,15 @@ const PickerContainer: React.FC = () => {
   )
 
   return (
-    <>
-      {size.toLocaleString()}
-      <Picker
-        ref={ref}
-        aria-label="Picker"
-        isOpen={isOpen}
-        items={viewport.items}
-        onOpenChange={onOpenChange}>
-        {(item) => <Item key={item.key}>{item.item ? item.key : '...'}</Item>}
-      </Picker>
-    </>
+    <Picker
+      ref={ref}
+      aria-label="Picker"
+      label={`Picker (${size.toLocaleString()} items)`}
+      isOpen={isOpen}
+      items={viewport.items}
+      onOpenChange={onOpenChange}>
+      {(item) => <Item key={item.key}>{item.item ? item.key : '...'}</Item>}
+    </Picker>
   )
 }
 
