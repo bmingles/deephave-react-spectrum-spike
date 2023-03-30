@@ -10,6 +10,8 @@
 
 The official docs have a good overview of the [architecture design](https://react-spectrum.adobe.com/architecture.html).
 
+> NOTE: React Spectrum does not currently support React strict mode. Weird things may happen if you enable it.
+
 ## Virtualization
 
 React Spectrum supports list virtualization out of the box, but it uses an "infinite scrolling" paradigm instead of a "windowing" one that we use in DH. It basically supports "scroll and give me next chunk of data, scroll again give me more, etc.". The concept of picking an arbitrary range of items in the list is not directly supported, and the scrollable area grows as items are added instead of being calculated based on the total size of the data source.

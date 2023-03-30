@@ -27,6 +27,8 @@ To make changes to `react-spectrum` source code, you can use to `relative-deps`
 package to point npm dependencies to local copies. You'll have to map `"relativeDependencies"`
 for packages under development to relative local paths.
 
+> NOTE: react-spectrum requires `yarn`, and I also had to downgrade to `node v16` to get things to build
+
 e.g.
 
 package.json
