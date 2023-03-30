@@ -2,6 +2,8 @@
 
 Experimenting with React Spectrum components with Deephaven core table subscriptions.
 
+[Spike Synopsis](./docs/SYNOPSIS.md)
+
 ## Run the App
 
 1. Clone the repo
