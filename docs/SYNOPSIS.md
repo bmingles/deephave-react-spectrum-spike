@@ -44,6 +44,8 @@ Adding support to `React Spectrum` for windowing seems to be a fundamental parad
   ![Custom Hooks](custom-hooks.png)
 - For most components, 100K items can be scrolled performantly. The `TableView` is the exception which can sometimes take a 1-2 seconds to re-render after scrolling to an unloaded window
 
+See [src/containers](../src/containers) folder for entry points into examples.
+
 #### TODO
 
 - Sorting has not been implemented
