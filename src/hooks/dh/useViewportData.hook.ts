@@ -1,5 +1,5 @@
 import React from 'react'
-import { useListData } from '@adobe/react-spectrum'
+import { useListData } from 'react-stately'
 import dh from '@/dh'
 import { RemoverFn, Table } from '@deephaven/jsapi-types'
 import { createRowToKeyedItem } from '@/utils/item'
